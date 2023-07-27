@@ -1,3 +1,4 @@
 module.exports = {
-    secret: "myhomepage-secret-key"
-  };
+  secret: 'myhomepage-secret-key',
+  expiration: '1h'
+};

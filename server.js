@@ -1,42 +1,43 @@
+const createError = require('http-errors');
 const express = require("express");
-const cors = require("cors");
-const cookieSession = require("cookie-session");
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
+const todoRouter = require('./routes/todo');
 
 const app = express();
 
-app.use(cors());
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// parse requests of content-type - application/json
-app.use(express.json());
+app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/users', usersRouter);
+app.use('/todo', todoRouter);
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
-
-app.use(
-  cookieSession({
-    name: "myhomepage-session",
-    keys: ["COOKIE_SECRET"], // should use as secret environment variable
-    httpOnly: true,
-  })
-);
-
-const db = require("./models");
-const Role = db.role;
-
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync Db');
-  Role.create({ name: "user" });
-  Role.create({ name: "admin" });
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to myhomepage.net" });
+  // render the error page
+  res.status(err.status || 500);
+  res.json({ message: res.locals.message });
 });
+
+module.exports = app;
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+app.listen(8080, () => {
+  console.log(`Server is running on port 8080.`);
 });
