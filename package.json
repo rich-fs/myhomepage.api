@@ -1,0 +1,22 @@
+{
+  "name": "myhomepage-api",
+  "version": "0.0.1",
+  "description": "API backend for myhomepage.app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "nodemon": "nodemon server.js"
+  },
+  "author": "Rich Williamson",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mysql2": "^3.5.2",
+    "nodemon": "^2.0.12",
+    "sequelize": "^6.32.1"
+  }
+}

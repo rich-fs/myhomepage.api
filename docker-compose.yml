@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: myhomepage
+      DB_PASSWORD: myhomepage
+      DB_NAME: myhomepage
+
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: myhomepage
+      MYSQL_DATABASE: myhomepage
+      MYSQL_USER: myhomepage
+      MYSQL_PASSWORD: myhomepage
+    volumes:
+      - mysql_data:/var/lib/mysql  
+
+volumes:
+  mysql_data:
