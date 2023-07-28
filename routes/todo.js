@@ -42,4 +42,32 @@ router.post('/', async (req, res) => {
   return res.status(201).json({ message: 'Todo item successfully created!' });
 });
 
+/* PATCH to do update a todo item. */
+router.patch('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    // Find the Todo record by its id
+    const todo = await Todo.findByPk(id);
+
+    if (!todo) {
+      return res.status(404).json({ error: 'Todo not found' });
+    }
+
+    // Update the Todo record with the new data
+    await todo.update(updates);
+
+    // Optionally, you can fetch the updated Todo after the update
+    const updatedTodo = await Todo.findByPk(id);
+
+    return res.json({
+      message: 'Todo updated successfully',
+      todo: updatedTodo,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: 'Error updating Todo' });
+  }
+});
+
 module.exports = router;
