@@ -61,7 +61,9 @@ router.patch('/:id', async (req, res) => {
     await todo.update(updates);
 
     // Optionally, you can fetch the updated Todo after the update
-    const updatedTodo = await Todo.findByPk(id);
+    const updatedTodo = await Todo.findByPk(id, {
+      attributes: ['id', 'title'],
+    });
 
     return res.json({
       message: 'Todo updated successfully',
