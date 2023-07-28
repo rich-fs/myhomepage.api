@@ -12,6 +12,18 @@ const User = db.user;
 router.post('/signup', async (req, res) => {
 
   const { username, password } = req.body;
+  
+  // Check if the username is already taken
+  const user = await User.findOne({
+    where: {
+      username: username
+    }
+  });
+  
+  if (user) {
+    return res.status(401).json({ message: 'That username is already taken, please try a different one.' });
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   User.create({ 
