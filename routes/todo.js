@@ -1,7 +1,8 @@
 const express = require('express');
+const db = require('../models');
+const verifyToken = require('../middleware/verify');
+
 const router = express.Router();
-const verifyToken = require('../middleware/verify.js');
-const db = require("../models");
 const Todo = db.todo;
 
 /* GET to do llist for a particular user. */
@@ -10,13 +11,13 @@ router.get('/', verifyToken, async (req, res) => {
 
   const todoList = await Todo.findAll({
     where: {
-      user_id: userId
-    }
+      user_id: userId,
+    },
   });
 
-  res.json({ 
-    message: "Welcome to todo list",
-    todoList: todoList
+  res.json({
+    message: 'Welcome to todo list',
+    todoList,
   });
 });
 

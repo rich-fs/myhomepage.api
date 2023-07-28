@@ -1,9 +1,10 @@
 const express = require('express');
+
 const router = express.Router();
 
 /* GET users listing. */
 router.get('/', (req, res) => {
-  res.json({ message: "Welcome to users page" });
+  res.json({ message: 'Welcome to users page' });
 });
 
 module.exports = router;

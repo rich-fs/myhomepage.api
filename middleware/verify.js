@@ -1,22 +1,22 @@
 const jwt = require('jsonwebtoken');
-const config = require("../config/auth.js")
+const config = require('../config/auth');
 
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   const token = req.header('Authorization');
-  
+
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
- 
-  jwt.verify(token.split(' ')[1], config.secret, (err, decoded) => {
 
-    if (err) {
-      return res.status(401).json({ message: err });
-    }
-
+  try {
+    const decoded = jwt.verify(token.split(' ')[1], config.secret);
     req.user = decoded;
     next();
-  });
+  } catch (err) {
+    return res.status(401).json({ message: err });
+  }
+
+  return null;
 };
 
 module.exports = verifyToken;
