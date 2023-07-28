@@ -31,9 +31,7 @@ router.post('/signup', async (req, res) => {
     password: hashedPassword,
   });
 
-  res.status(201).json({ message: 'User signed up successfully!' });
-
-  return null;
+  return res.status(201).json({ message: 'User signed up successfully!' });
 });
 
 // Login route
@@ -58,9 +56,8 @@ router.post('/login', async (req, res) => {
   const token = jwt.sign({ id: user.id, username: user.username }, config.secret, {
     expiresIn: config.expiration,
   });
-  res.json({ token });
 
-  return null;
+  return res.json({ token });
 });
 
 module.exports = router;
