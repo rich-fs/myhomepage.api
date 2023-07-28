@@ -12,7 +12,9 @@ router.get('/', verifyToken, async (req, res) => {
   const todoList = await Todo.findAll({
     where: {
       user_id: userId,
+      completed: false,
     },
+    attributes: ['id', 'title'],
   });
 
   res.json({
