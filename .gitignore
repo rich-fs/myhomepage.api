@@ -1,5 +1,7 @@
-# npm
+# NPM
 node_modules
 package-lock.json
 *.log
-*.gz
+
+# VS Code
+*.code-workspace
