@@ -29,7 +29,7 @@ app.use('/todo', todoRouter);
 // const db = require('./models');
 
 // db.sequelize.sync({ force: true }).then(() => {
-//   logger('Drop and Resync Db');
+//   logger.info('Drop and Resync Db');
 // });
 
 // catch 404 and forward to error handler
