@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const cache = require('memory-cache');
 
 const router = express.Router();
 
@@ -7,15 +8,30 @@ const router = express.Router();
 router.get('/', (req, res) => {
   res.json({ message: 'Welcome to myhomepage.net' });
 });
-
+// Function to fetch data from Bing API
+const fetchBingData = async () => {
+  try {
+    const response = await axios.get('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US');
+    return response.data.images[0].url;
+  } catch (error) {
+    throw new Error('Error fetching data from Bing server.');
+  }
+};
 // Route to fetch data from the Bing server and send it to the client
 router.get('/bing-wallpaper', async (req, res) => {
   try {
-    const response = await axios.get('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US');
-    const { url } = response.data.images[0];
-    res.json({ url });
+    const cachedData = cache.get('bing-data');
+    if (cachedData) {
+      // If data is cached, use it
+      res.json({ url: cachedData });
+    } else {
+      // If data is not cached, fetch it and cache it for one day
+      const freshData = await fetchBingData();
+      cache.put('bing-data', freshData, 24 * 60 * 60 * 1000);
+      res.json({ url: freshData });
+    }
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching data from Bing server.' });
+    res.status(500).json({ error: error.message });
   }
 });
 
