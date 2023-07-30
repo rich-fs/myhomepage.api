@@ -1,6 +1,8 @@
 const createError = require('http-errors');
 const express = require('express');
 const pino = require('pino');
+const cors = require('cors');
+
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -18,6 +20,7 @@ const logger = pino({
   },
 });
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
