@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   res.json({ message: 'Welcome to myhomepage.net' });
 });
+
 // Function to fetch data from Bing API
 const fetchBingData = async () => {
   try {
@@ -17,6 +18,7 @@ const fetchBingData = async () => {
     throw new Error('Error fetching data from Bing server.');
   }
 };
+
 // Route to fetch data from the Bing server and send it to the client
 router.get('/bing-wallpaper', async (req, res) => {
   try {
