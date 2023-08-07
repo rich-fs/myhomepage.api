@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
+    email: {
       type: Sequelize.STRING,
       unique: true,
     },
@@ -15,9 +15,9 @@ module.exports = (sequelize, Sequelize) => {
   }, {
     indexes: [
       {
-        name: 'unique_username',
+        name: 'unique_email',
         unique: true,
-        fields: ['username'],
+        fields: ['email'],
       }],
   });
 

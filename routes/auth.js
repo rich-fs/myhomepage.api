@@ -10,23 +10,23 @@ const User = db.user;
 
 // POST Signup route
 router.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  // Check if the username is already taken
+  // Check if the email is already taken
   const user = await User.findOne({
     where: {
-      username,
+      email,
     },
   });
 
   if (user) {
-    return res.status(401).json({ message: 'That username is already taken, please try a different one.' });
+    return res.status(401).json({ message: 'That email is already taken, please try a different one.' });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
   User.create({
-    username,
+    email,
     password: hashedPassword,
   });
 
@@ -35,10 +35,10 @@ router.post('/signup', async (req, res) => {
 
 // POST Login route
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   const user = await User.findOne({
     where: {
-      username,
+      email,
     },
   });
 
@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
 
-  const token = jwt.sign({ id: user.id, username: user.username }, config.secret, {
+  const token = jwt.sign({ id: user.id, email: user.email }, config.secret, {
     expiresIn: config.expiration,
   });
 

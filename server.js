@@ -29,11 +29,11 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/todo', todoRouter);
 
-// const db = require('./models');
+const db = require('./models');
 
-// db.sequelize.sync({ force: true }).then(() => {
-//   logger.info('Drop and Resync Db');
-// });
+db.sequelize.sync({ force: true }).then(() => {
+  logger.info('Drop and Resync Db');
+});
 
 // Catch 404 and forward to error handler.
 app.use((req, res, next) => {
