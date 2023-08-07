@@ -45,6 +45,7 @@ The API will be available at: http://localhost:3030
 ## Contributing
 
 Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
-License
 
-This project is licensed under the MIT License.
+## License
+
+This project is licensed under the GNU GPL3 License.
