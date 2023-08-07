@@ -6,7 +6,7 @@ const router = express.Router();
 
 // GET home page.
 router.get('/', (req, res) => {
-  res.json({ message: 'Welcome to myhomepage.net' });
+  res.json({ message: 'Welcome to myhomepage.app' });
 });
 
 // Function to fetch data from Bing API
