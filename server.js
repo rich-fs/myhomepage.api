@@ -8,7 +8,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
-const usersRouter = require('./routes/users');
 const todoRouter = require('./routes/todo');
 
 const app = express();
@@ -28,7 +27,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/users', usersRouter);
 app.use('/todo', todoRouter);
 
 // const db = require('./models');
