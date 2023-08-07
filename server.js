@@ -8,6 +8,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const maintenanceRouter = require('./routes/maintenance');
 const todoRouter = require('./routes/todo');
 
 const app = express();
@@ -27,13 +28,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/maintenance', maintenanceRouter);
 app.use('/todo', todoRouter);
-
-const db = require('./models');
-
-db.sequelize.sync({ force: true }).then(() => {
-  logger.info('Drop and Resync Db');
-});
 
 // Catch 404 and forward to error handler.
 app.use((req, res, next) => {
