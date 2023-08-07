@@ -5,7 +5,7 @@ const verifyToken = require('../middleware/verify');
 const router = express.Router();
 const Todo = db.todo;
 
-/* GET to do list for a particular user. */
+// GET to do list for a particular user.
 router.get('/', verifyToken, async (req, res) => {
   const userId = req.user.id;
 
@@ -23,9 +23,9 @@ router.get('/', verifyToken, async (req, res) => {
   });
 });
 
-/* POST to do add a todo item for a particular user. */
+// POST to do add a todo item for a particular user.
 router.post('/', async (req, res) => {
-  const userId = 1;
+  const userId = req.user.id;
   const { title } = req.body;
 
   if (!title) {
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
   return res.status(201).json({ message: 'Todo item successfully created!' });
 });
 
-/* PATCH to do update a todo item. */
+// PATCH to do update a todo item.
 router.patch('/:id', async (req, res) => {
   try {
     const { id } = req.params;

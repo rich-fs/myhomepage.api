@@ -4,7 +4,7 @@ const cache = require('memory-cache');
 
 const router = express.Router();
 
-/* GET home page. */
+// GET home page.
 router.get('/', (req, res) => {
   res.json({ message: 'Welcome to myhomepage.net' });
 });
@@ -28,9 +28,9 @@ router.get('/bing-wallpaper', async (req, res) => {
       res.json({ url: cachedData });
     } else {
       // If data is not cached, fetch it and cache it for one day
-      const freshData = await fetchBingData();
-      cache.put('bing-data', freshData, 24 * 60 * 60 * 1000);
-      res.json({ url: freshData });
+      const data = await fetchBingData();
+      cache.put('bing-data', data, 24 * 60 * 60 * 1000);
+      res.json({ url: data });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

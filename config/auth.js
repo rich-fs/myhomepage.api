@@ -1,4 +1,4 @@
 module.exports = {
-  secret: 'myhomepage-secret-key',
-  expiration: '7d',
+  secret: process.env.AUTH_SECRET,
+  expiration: process.env.AUTH_DURATION,
 };

@@ -1,15 +1,14 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-const router = express.Router();
-
 const db = require('../models');
 const config = require('../config/auth');
 
+const router = express.Router();
+
 const User = db.user;
 
-// Signup route
+// POST Signup route
 router.post('/signup', async (req, res) => {
   const { username, password } = req.body;
 
@@ -34,7 +33,7 @@ router.post('/signup', async (req, res) => {
   return res.status(201).json({ message: 'User signed up successfully!' });
 });
 
-// Login route
+// POST Login route
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({

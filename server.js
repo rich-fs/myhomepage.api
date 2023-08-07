@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const pino = require('pino');
@@ -35,26 +37,27 @@ app.use('/todo', todoRouter);
 //   logger.info('Drop and Resync Db');
 // });
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler.
 app.use((req, res, next) => {
   next(createError(404));
 });
 
-// error handler
+// Error handler
 // eslint-disable-next-line
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
   res.json({ message: res.locals.message });
 });
 
 module.exports = app;
 
-// set port, listen for requests
-app.listen(8080, () => {
-  logger.info('Server is running on port 8080.');
+// Set port & listen for requests.
+const PORT = process.env.PORT || 3030;
+app.listen(PORT, () => {
+  logger.info(`Server is running on port ${process.env.PORT}`);
 });
