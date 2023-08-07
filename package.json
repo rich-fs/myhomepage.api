@@ -1,15 +1,23 @@
 {
-  "name": "myhomepage-api",
-  "version": "0.0.1",
+  "name": "api.myhomepage.app",
+  "version": "1.0.0",
   "description": "API backend for myhomepage.app",
+  "homepage": "https://api.myhomepage.app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "nodemon": "nodemon server.js",
     "lint": "eslint ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rich-fs/myhomepage.api.git"
+  },
   "author": "Rich Williamson",
-  "license": "ISC",
+  "license": "GNU GPL V3",
+  "bugs": {
+    "url": "https://github.com/rich-fs/myhomepage.api/issues"
+  },
   "dependencies": {
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
