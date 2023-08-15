@@ -28,7 +28,6 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.1",
     "memory-cache": "^0.2.0",
-    "mysql2": "^3.5.2",
     "nodemon": "^3.0.1",
     "pg": "^8.11.2",
     "pg-hstore": "^2.3.4",
