@@ -30,6 +30,8 @@
     "memory-cache": "^0.2.0",
     "mysql2": "^3.5.2",
     "nodemon": "^3.0.1",
+    "pg": "^8.11.2",
+    "pg-hstore": "^2.3.4",
     "pino": "^8.14.2",
     "pino-pretty": "^10.2.0",
     "sequelize": "^6.32.1"
