@@ -3,7 +3,6 @@
 
 # NPM
 node_modules
-package-lock.json
 *.log
 
 # VS Code
