@@ -5,6 +5,7 @@ module.exports = {
   DB: process.env.DB_NAME,
   PORT: process.env.DB_PORT,
   DIALECT: process.env.DB_DIALECT,
+  SSL: process.env.DB_SSL,
   pool: {
     max: 5,
     min: 0,
