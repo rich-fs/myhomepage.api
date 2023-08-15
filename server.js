@@ -11,6 +11,7 @@ const authRouter = require('./routes/auth');
 const maintenanceRouter = require('./routes/maintenance');
 const todoRouter = require('./routes/todo');
 
+const router = express.Router();
 const app = express();
 
 const logger = pino({

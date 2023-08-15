@@ -9,6 +9,10 @@ router.get('/', (req, res) => {
   res.json({ message: 'Welcome to myhomepage.app' });
 });
 
+router.get('/env', (req, res) => {
+  res.json({ message: JSON.stringify(process.env) });
+});
+
 // Function to fetch data from Bing API
 const fetchBingData = async () => {
   try {
