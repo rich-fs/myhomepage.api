@@ -1,15 +1,20 @@
+const isDev = process.env.NODE_ENV === 'development';
+
 module.exports = {
-  HOST: process.env.DB_HOST,
+  DB: process.env.DB_NAME,
   USER: process.env.DB_USER,
   PASSWORD: process.env.DB_PASSWORD,
-  DB: process.env.DB_NAME,
+  HOST: process.env.DB_HOST,
   PORT: process.env.DB_PORT,
-  DIALECT: process.env.DB_DIALECT,
-  SSL: process.env.DB_SSL,
+  DIALECT: 'postgres',
   pool: {
     max: 5,
     min: 0,
     acquire: 30000,
     idle: 10000,
+  },
+  ssl: isDev ? false : {
+    require: true,
+    rejectUnauthorized: false,
   },
 };

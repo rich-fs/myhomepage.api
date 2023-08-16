@@ -1,9 +1,6 @@
 const Sequelize = require('sequelize');
 const config = require('../config/database');
 
-// Convert the string value to a boolean
-const sslValue = config.SSL === 'true';
-
 const sequelize = new Sequelize(
   config.DB,
   config.USER,
@@ -12,7 +9,7 @@ const sequelize = new Sequelize(
     host: config.HOST,
     dialect: config.DIALECT,
     dialectOptions: {
-      ssl: sslValue,
+      ssl: config.ssl,
     },
     port: config.PORT,
     pool: {
