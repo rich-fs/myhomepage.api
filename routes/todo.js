@@ -17,10 +17,7 @@ router.get('/', verifyToken, async (req, res) => {
     attributes: ['id', 'title'],
   });
 
-  res.json({
-    message: 'Welcome to todo list',
-    todoList,
-  });
+  res.json(todoList);
 });
 
 // POST to do add a todo item for a particular user.
