@@ -21,7 +21,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // POST to do add a todo item for a particular user.
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   const userId = req.user.id;
   const { title } = req.body;
 
@@ -30,19 +30,19 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    await Todo.create({
+    const newTodo = await Todo.create({
       user_id: userId,
       title,
     });
+
+    return res.json(newTodo);
   } catch (err) {
     return res.status(422).json({ message: 'Error creating Todo item, please try again.' });
   }
-
-  return res.status(201).json({ message: 'Todo item successfully created!' });
 });
 
 // PATCH to do update a todo item.
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
@@ -62,10 +62,7 @@ router.patch('/:id', async (req, res) => {
       attributes: ['id', 'title'],
     });
 
-    return res.json({
-      message: 'Todo updated successfully',
-      todo: updatedTodo,
-    });
+    return res.json(updatedTodo);
   } catch (error) {
     return res.status(500).json({ error: 'Error updating Todo' });
   }
